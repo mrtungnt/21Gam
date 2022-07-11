@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "752809281172",
+    "project_id": "firstcloudfirestore",
+    "storage_bucket": "firstcloudfirestore.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752809281172:android:6dfeb4a5b937c634b89681",
+        "android_client_info": {
+          "package_name": "com.example.firstcloudfirestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752809281172-211vm7m3u14urh29b4oc4hutudr6tcda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA84bzIiOva35l5PPtp7wNtNzYTQNtTF_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752809281172-211vm7m3u14urh29b4oc4hutudr6tcda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752809281172:android:e2857e7c8f64b4dcb89681",
+        "android_client_info": {
+          "package_name": "com.example.twentyonegam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752809281172-211vm7m3u14urh29b4oc4hutudr6tcda.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA84bzIiOva35l5PPtp7wNtNzYTQNtTF_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752809281172-211vm7m3u14urh29b4oc4hutudr6tcda.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
