@@ -14,7 +14,9 @@ import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.twentyonegam.ui.theme.TwentyOneGamTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,12 +28,12 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val v = viewModel<MainViewModel>()
-                    LaunchedEffect(key1 = Unit, block = { v.testQuery() })
+                    LaunchedEffect(key1 = Unit, block = { v.testQuery(); v.testQuery2() })
                     val state = v.queriedUsers.collectAsState()
+                    val state2 = v.queriedUsers2.collectAsState()
                     Column() {
-                        /*  v.queriedUsers.collectAsState.
-                          { key(it?.id) { Text(text = "${it?.name} ${it?.number}") } }*/
                         state.value.forEach { key(it?.id) { Text(text = "${it?.name} ${it?.number}") } }
+                        state2.value.forEach { key(it.id) { Text(text = "${it["name"]} ${RoleEnum.values()[(it["role"] as Long).toInt()]}") } }
                     }
                 }
             }

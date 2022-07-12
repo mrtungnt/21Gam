@@ -1,12 +1,14 @@
 package com.example.twentyonegam
 
 import android.util.Log
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
 class User {
     var id = ""
@@ -14,7 +16,7 @@ class User {
     var number = 0
 }
 
-class UserRepository {
+class UserRepository @Inject constructor() {
     private val firestore = FirebaseFirestore.getInstance();
 
     init {
@@ -44,5 +46,19 @@ class UserRepository {
             Log.d(tag, e.message ?: "?")
         }
         return l
+    }
+
+    suspend fun testQuery2(): List<DocumentSnapshot> {
+        return try {
+            db.collection("users")
+//                .whereEqualTo("name", "Nam")
+                .get()
+                .await()
+                .documents
+
+        } catch (e: Exception) {
+            Log.d(tag, e.message ?: "?")
+            emptyList<DocumentSnapshot>()
+        }
     }
 }
