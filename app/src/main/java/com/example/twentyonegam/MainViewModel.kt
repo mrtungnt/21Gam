@@ -7,23 +7,43 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
+const val ALL_USERS_QUERY = "all_users"
+const val USERS_BY_NAME_QUERY = "users_by_name"
+
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val userRepository: UserRepository,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-    val queriedUsers: StateFlow<List<User?>> =
-        savedStateHandle.getStateFlow<List<User?>>("users", initialValue = emptyList())
+    @Inject
+    lateinit var userRepository: UserRepository
 
-    val queriedUsers2: StateFlow<List<DocumentSnapshot>> =
-        savedStateHandle.getStateFlow<List<DocumentSnapshot>>("users2", initialValue = emptyList())
+    @Inject
+    lateinit var workRepository: WorkRepository
 
-    suspend fun testQuery() {
-        savedStateHandle["users"] = userRepository.testQuery()
+    val allUserQuery: StateFlow<List<DocumentSnapshot>> =
+        savedStateHandle.getStateFlow<List<DocumentSnapshot>>(
+            ALL_USERS_QUERY,
+            initialValue = emptyList()
+        )
+
+    val usersByNameQuery: StateFlow<List<DocumentSnapshot>> =
+        savedStateHandle.getStateFlow<List<DocumentSnapshot>>(
+            USERS_BY_NAME_QUERY,
+            initialValue = emptyList()
+        )
+
+    suspend fun getAllUsersAsDocumentSnapshot() {
+        savedStateHandle[ALL_USERS_QUERY] =
+            userRepository.getUsersAsDocumentSnapShot(userRepository.queryAllUsers())
     }
 
-    suspend fun testQuery2() {
-        savedStateHandle["users2"] = userRepository.testQuery2()
+    suspend fun getUsersByNameAsDocumentSnapshot(name: String) {
+        savedStateHandle[USERS_BY_NAME_QUERY] =
+            userRepository.getUsersAsDocumentSnapShot(userRepository.queryUsersByName(name))
+    }
+
+    suspend fun buildTechnicalDivisionWorkItems() {
+        workRepository.buildTechnicalDivisionWorkItems()
     }
 
 }
